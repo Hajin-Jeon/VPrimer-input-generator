@@ -11,9 +11,9 @@ int parse_organism_host()
 	string path = "../FASTA/host.fasta";
 
 	ifstream in(path);
-	ofstream out("../data/host_annotation.txt");	// about tid
+	ofstream out("../result/host_annotation.txt");	// about tid
 	ofstream out2("../data/host_tid_sequence.txt");
-	ofstream out3("../data/host_sid_sequence.txt");
+	ofstream out3("../result/host_sid_sequence.txt");
 
 	int cur_cid = 0;
 	int cur_cid_rem = 1;
