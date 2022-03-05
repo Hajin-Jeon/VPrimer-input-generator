@@ -37,12 +37,31 @@ The basic execution order is as follows.
 
 # 3. Result
 The intermediate data will be generated as follow in "data" folder:
-- annotation data (host_annotation.txt, virus_annotation.txt)
+- mapping data for sid and sequence (virus_sid_sequence.txt)
 - mapping data for tid and sequence (host_tid_sequence.txt, virus_tid_sequence.txt)
+- virus_sid_tids.txt
+- virus_annotation_sid.txt
+- virus_tid_acc.txt
+- virus_sid_accs.txt
+- virus_virus_oid.txt
+- virus_viruscds_cid.txt
+- virus_sid_oids.txt
+- virus_oid_sid.txt
+- virus_sid_cids.txt
+- virus_cid_sid.txt
+- virus_sort_tid_vidcds_seq.txt
+- virus_sort_tid_cid.txt
+- virus_sort_annotation_sid.txt
+- virus_sort_oid_tids.txt
+- virus_sort_tid_oid.txt
+- virus_sort_tid_vids.txt
+- virus_sort_oid_vids.txt
+- virus_sort_vid_acc.txt
 
 The result data will be generated as follow in "result" folder:
-- mapping data for sid and sequence (host_sid_sequence.txt, virus_sid_sequence.txt)
+- mapping data for sid and sequence (host_sid_sequence, virus_sort_tid_seq.txt)
 - mapping data for virus sequence (oid-vidset, sid-oid, sid-vidset)
+- annotation data (host_annotation.txt, virus_sort_annotation_sid.txt) (not be used in VPrimer CLI mode)
 
 
 If you have any question, please contact summerj2@dgist.ac.kr
