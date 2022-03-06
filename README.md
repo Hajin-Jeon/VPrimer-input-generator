@@ -26,6 +26,12 @@ The required data is as follow in "FASTA" folder:
 - host sequence (host.fasta, in FASTA format)
 - virus sequence (virus.fasta, in FASTA format)
 
+At this time, the format of the virus sequence should be as follows:
+- starts with '>' sign
+- each column must be separated by the '|' symbol
+- The structure as "(Coding Sequence) [Virus Name]"
+- (for example: >QLI57642.1 |hypothetical protein [Orf virus]): starts with '>' sign, separated by '|' symbol, CDS is hypothetical protein, and virus name is Orf virus
+
 ## 2.2 make
 input "make" in the "src" folder. Then, the file "VPrimer_input_generator" would be generated.
 
