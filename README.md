@@ -41,6 +41,22 @@ The basic execution order is as follows.
 - virus sequence parsing
 - generating mapping data
 
+## 2.4 how to start
+
+Optional arguments: 
+
+| Parameter                 | Default       | Description   |	
+| :------------------------ |:-------------:| :-------------|
+| -i 	       |	../FASTA           |input FASTA sequence folder path
+| -d          | ../data           |final output folder path
+| -o 	       |	../result	            |intermediate data folder path
+| -h (or others)	       | (none)	           | help message
+
+Example: 
+```
+./VPrimer_input_generator -i /home/(username)/VPrimer/FASTA -d /home/(username)/VPrimer/data/ -o /home/(username)/VPrimer/result/
+```
+
 # 3. Result
 The intermediate data will be generated as follow in "data" folder:
 - mapping data for sid and sequence (virus_sid_sequence.txt)
