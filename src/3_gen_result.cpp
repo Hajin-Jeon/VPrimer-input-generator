@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <string>
 #include <map>
+#include "3_gen_result.hpp"
 
 using namespace std;
 
@@ -51,8 +52,12 @@ string get_cds(string tmp)
 	return str;
 }
 
-void gen_result(int num_host_seq)
+void gen_result(int num_host_seq, inputParameter *input)
 {
+        string inputPath(input->inputPath);
+        string dataPath(input->dataPath);
+        string outputPath(input->outputPath);
+
 	string cur_org;
 	string str, tmp, tmp2;
 	int cur_tid;
@@ -66,14 +71,14 @@ void gen_result(int num_host_seq)
 
 	if (sid_tids_gen)
 	{
-		ifstream in3("../data/virus_tid_sequence.txt");
-		ifstream in4("../data/virus_sid_sequence.txt");
-		ifstream in5("../data/virus_annotation.txt");
+		ifstream in3(dataPath + "/virus_tid_sequence.txt");
+		ifstream in4(dataPath + "/virus_sid_sequence.txt");
+		ifstream in5(dataPath + "/virus_annotation.txt");
 
-		ofstream out4("../data/virus_sid_tids.txt");
-		ofstream out5("../data/virus_annotation_sid.txt");
-		ofstream out6("../data/virus_tid_acc.txt");
-		ofstream out7("../data/virus_sid_accs.txt");
+		ofstream out4(dataPath + "/virus_sid_tids.txt");
+		ofstream out5(dataPath + "/virus_annotation_sid.txt");
+		ofstream out6(dataPath + "/virus_tid_acc.txt");
+		ofstream out7(dataPath + "/virus_sid_accs.txt");
 
 		map<string, int> seq;		// unique sequence / sid
 		map<int, string> anno;
@@ -141,10 +146,10 @@ void gen_result(int num_host_seq)
 	// tid가 각각 어느 vid에 배정되는지
 	if (tid_vid_gen)
 	{
-		ifstream in("../data/virus_annotation.txt");
+		ifstream in(dataPath + "/virus_annotation.txt");
 
-		ofstream out("../data/virus_virus_oid.txt");
-		ofstream out2("../data/virus_viruscds_cid.txt"); // "virus=cds" with cid (CDS id). original: virus_vidcds
+		ofstream out(dataPath + "/virus_virus_oid.txt");
+		ofstream out2(dataPath + "/virus_viruscds_cid.txt"); // "virus=cds" with cid (CDS id). original: virus_vidcds
 
 		int cur_tid = num_host_seq;
 		int cur_vid = 0;
@@ -198,12 +203,12 @@ void gen_result(int num_host_seq)
 	// generation of cid_rem_vids
 	if (sid_vids_total_gen)
 	{
-		ifstream in("../data/virus_sid_tids.txt");
+		ifstream in(dataPath + "/virus_sid_tids.txt");
 
-		ofstream out("../data/virus_sid_oids.txt");
-		ofstream out2("../data/virus_oid_sid.txt");
-		ofstream out3("../data/virus_sid_cids.txt");
-		ofstream out4("../data/virus_cid_sid.txt");
+		ofstream out(dataPath + "/virus_sid_oids.txt");
+		ofstream out2(dataPath + "/virus_oid_sid.txt");
+		ofstream out3(dataPath + "/virus_sid_cids.txt");
+		ofstream out4(dataPath + "/virus_cid_sid.txt");
 
 		string num;
 		string tid_vids;
@@ -272,14 +277,14 @@ void gen_result(int num_host_seq)
 	{
 		cout << "sort by vidcds start" << endl;
 
-		ifstream in("../data/virus_sid_sequence.txt");
-		ifstream in2("../data/virus_cid_sid.txt");
-		ifstream in3("../data/virus_annotation_sid.txt");
-		ifstream in4("../data/virus_viruscds_cid.txt");
+		ifstream in(dataPath + "/virus_sid_sequence.txt");
+		ifstream in2(dataPath + "/virus_cid_sid.txt");
+		ifstream in3(dataPath + "/virus_annotation_sid.txt");
+		ifstream in4(dataPath + "/virus_viruscds_cid.txt");
 
-		ofstream out("../result/virus_sort_tid_seq.txt");
-		ofstream out2("../data/virus_sort_tid_cid.txt");
-		ofstream out3("../result/virus_sort_annotation_sid.txt");
+		ofstream out(outputPath + "/virus_sort_tid_seq.txt");
+		ofstream out2(dataPath + "/virus_sort_tid_cid.txt");
+		ofstream out3(outputPath + "/virus_sort_annotation_sid.txt");
 
 		int cur_tid, cur_vidcds;
 		string tmp, str;
@@ -350,16 +355,16 @@ void gen_result(int num_host_seq)
 	{
 		cout << "aid_gen" << endl;
 
-		ifstream in_anno("../data/virus_annotation_sid.txt");
-		ifstream in_sort_anno("../result/virus_sort_annotation_sid.txt");
-		ifstream in_acc("../data/virus_sid_accs.txt");
+		ifstream in_anno(dataPath + "/virus_annotation_sid.txt");
+		ifstream in_sort_anno(outputPath + "/virus_sort_annotation_sid.txt");
+		ifstream in_acc(dataPath + "/virus_sid_accs.txt");
 
-		ofstream out_vid_tids("../data/virus_sort_oid_tids.txt");
-		ofstream out_tid_vid("../result/sid_oid.txt");
-		ofstream out_tid_aids("../result/sid_vidset.txt");
-		ofstream out_vid_aids("../result/oid_vidset.txt");
+		ofstream out_vid_tids(dataPath + "/virus_sort_oid_tids.txt");
+		ofstream out_tid_vid(outputPath + "/sid_oid.txt");
+		ofstream out_tid_aids(outputPath + "/sid_vidset.txt");
+		ofstream out_vid_aids(outputPath + "/oid_vidset.txt");
 
-		ofstream out_aid_acc("../data/virus_sort_vid_acc.txt");
+		ofstream out_aid_acc(dataPath + "/virus_sort_vid_acc.txt");
 
 		int cur_tid;
 		map<string, int> anno_tid;	// tid of annotation_sid
@@ -417,7 +422,7 @@ void gen_result(int num_host_seq)
 			stid_accs[it->first] = tid_accs[it->second];
 		}
 
-		ifstream in_tid_vid("../result/sid_oid.txt");
+		ifstream in_tid_vid(outputPath + "/sid_oid.txt");
 		cur_tid = num_host_seq;
 
 		int bef_vid = 1;

@@ -2,18 +2,28 @@
 #include <fstream>
 #include <string>
 #include <map>
-#include "library.h"
+#include "library.hpp"
 
 using namespace std;
 
-int parse_organism_host()
+int parse_organism_host(inputParameter *input)
 {
-	string path = "../FASTA/host.fasta";
+	string inputPath(input->inputPath);
+	string dataPath(input->dataPath);
+	string outputPath(input->outputPath);
+
+	// string path = "../FASTA/host.fasta";
+	string path = inputPath + "/host.fasta";
 
 	ifstream in(path);
+	/*
 	ofstream out("../result/host_annotation.txt");	// about tid
 	ofstream out2("../data/host_tid_sequence.txt");
 	ofstream out3("../result/host_sid_sequence.txt");
+	*/
+	ofstream out(outputPath + "/host_annotation.txt");
+	ofstream out2(dataPath + "/host_tid_sequence.txt");
+	ofstream out3(outputPath + "/host_sid_sequence.txt");
 
 	int cur_cid = 0;
 	int cur_cid_rem = 1;
@@ -47,9 +57,9 @@ int parse_organism_host()
 	return cur_cid_rem - 1;	// number of sid
 }
 
-int gen_host_seq()
+int gen_host_seq(inputParameter *input)
 {
-	int host_seq = parse_organism_host();
+	int host_seq = parse_organism_host(input);
 
 	return host_seq;
 }

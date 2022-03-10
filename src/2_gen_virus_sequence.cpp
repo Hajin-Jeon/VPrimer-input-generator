@@ -2,18 +2,28 @@
 #include <fstream>
 #include <string>
 #include <map>
-#include "library.h"
+#include "library.hpp"
 
 using namespace std;
 
-void parse_organism_virus(int num_host_seq)
+void parse_organism_virus(int num_host_seq, inputParameter *input)
 {
-	string path = "../FASTA/virus.fasta";
+	string inputPath(input->inputPath);
+	string dataPath(input->dataPath);
+	string outputPath(input->outputPath);
+
+	string path = inputPath + "/virus.fasta";
+	//string path = "../FASTA/virus.fasta";
 
 	ifstream in(path);
+	/*
 	ofstream out("../data/virus_annotation.txt");
 	ofstream out2("../data/virus_tid_sequence.txt");
 	ofstream out3("../data/virus_sid_sequence.txt");
+	*/
+	ofstream out(dataPath + "/virus_annotation.txt");
+	ofstream out2(dataPath + "/virus_tid_sequence.txt");
+	ofstream out3(dataPath + "/virus_sid_sequence.txt");
 
 	int cur_cid = 0;
 	int cur_cid_rem = 0;
@@ -47,9 +57,9 @@ void parse_organism_virus(int num_host_seq)
 	return;
 }
 
-void gen_virus_seq(int num_host_seq)
+void gen_virus_seq(int num_host_seq, inputParameter *input)
 {
-	parse_organism_virus(num_host_seq);
+	parse_organism_virus(num_host_seq, input);
 
 	return;
 
